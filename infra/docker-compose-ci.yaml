@@ -1,0 +1,10 @@
+version: "3.6"
+
+services:
+  skywars:
+    build:
+      context: ..
+    image: ruslanjo/cw_5
+    ports:
+      - "8080:80"
+    restart: always
