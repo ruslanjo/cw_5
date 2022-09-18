@@ -27,19 +27,19 @@
     "id": 1,
     "name": "футболка",
     "defence": 0,
-    "stamina_per_turn": 0
+    "stamina_per_hit": 0
     },
     {
     "id": 2,
     "name":"кожаная броня",
     "defence": 1.2,
-    "stamina_per_turn": 1
+    "stamina_per_hit": 1
     },
     {
     "id": 3,
     "name": "панцирь",
     "defence": 2.0,
-    "stamina_per_turn": 1.6
+    "stamina_per_hit": 1.6
     }
   ]
 }

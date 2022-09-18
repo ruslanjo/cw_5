@@ -5,7 +5,7 @@ from typing import Optional
 
 import marshmallow
 import marshmallow_dataclass
-from constants import EQUIPMENT_DATA_PATH
+from application.constants import EQUIPMENT_DATA_PATH
 
 
 @dataclasses.dataclass
@@ -19,16 +19,15 @@ class Weapon:
         unknown = marshmallow.EXCLUDE
 
     def calculate_damage(self) -> float:
-        random.seed(1)
         generated_damage: float = random.uniform(self.min_damage, self.max_damage)
-        return round(generated_damage, 2)
+        return generated_damage
 
 
 @dataclasses.dataclass
 class Armor:
     name: str
     defence: float
-    stamina_per_turn: float
+    stamina_per_hit: float
 
     class Meta:
         unknown = marshmallow.EXCLUDE
@@ -46,8 +45,8 @@ weapon_schema = marshmallow_dataclass.class_schema(Weapon)()
 
 class Equipment:
     def __init__(self):
-        json_data = self._read_json(EQUIPMENT_DATA_PATH)
-        self._equipment = self._convert_json_to_dataclass(json_data)
+        json_data: dict | list = self._read_json(EQUIPMENT_DATA_PATH)
+        self._equipment: EquipmentData = self._convert_json_to_dataclass(json_data)
 
     @property
     def equipment(self):
@@ -84,17 +83,3 @@ class Equipment:
 
     def get_armors_list(self) -> list[Armor]:
         return [armor.name for armor in self.equipment.armors_list]
-
-
-eq = Equipment()
-
-print(eq.equipment)
-
-print(eq.get_weapon('топорик'))
-
-print(eq.get_weapons_list())
-
-
-
-
-
