@@ -24,15 +24,5 @@ jobs:
         run: |
           mkdir deploy
           cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
-      - name: copy files to the server
-        uses: appleboy/scp-action@master
-        with:
-          host: {{ secrets.HOST }}
-          username: {{ secrets.SSH_USERNAME }}
-          password: {{ secrets.SSH_PASSWORD }}
-          source: "deploy/docker-compose.yaml"
-          target: "cw_5_ci"
-          strip_components: 1
-
-
+      
 
